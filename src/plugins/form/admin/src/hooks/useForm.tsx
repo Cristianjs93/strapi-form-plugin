@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
-import IForm from '../models/IForm';
+import IEntry from '../models/IEntry';
+import { initialState } from '../data/constants/initialFormState';
 import { validators } from '../data/constants/validators';
 import {
   getEmailErrorMessage,
@@ -8,37 +9,29 @@ import {
 } from '../utils/getErrorsMessage';
 
 export default function useForm() {
-  const [form, setForm] = useState<IForm>({
-    name: '',
-    email: '',
-    message: '',
-  });
+  const [values, setFormValues] = useState<IEntry>(initialState);
 
-  const [errors, setErrors] = useState<IForm>({
-    name: '',
-    email: '',
-    message: '',
-  });
+  const [errors, setErrors] = useState<IEntry>(initialState);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
-    setForm({
-      ...form,
+    setValues({
+      ...values,
       [id]: value,
     });
   };
 
   const validateForm = () => {
-    const newErrors: IForm = { name: '', email: '', message: '' };
+    const newErrors: IEntry = { name: '', email: '', message: '' };
 
-    if (!validators.name.test(form.name)) {
-      newErrors.name = getNameErrorMessage(form.name.length);
+    if (!validators.name.test(values.name)) {
+      newErrors.name = getNameErrorMessage(values.name.length);
     }
-    if (!validators.email.test(form.email)) {
-      newErrors.email = getEmailErrorMessage(form.email.length);
+    if (!validators.email.test(values.email)) {
+      newErrors.email = getEmailErrorMessage(values.email.length);
     }
-    if (!validators.message.test(form.message)) {
-      newErrors.message = getMessageErrorMessage(form.message.length);
+    if (!validators.message.test(values.message)) {
+      newErrors.message = getMessageErrorMessage(values.message.length);
     }
 
     setErrors(newErrors);
@@ -46,5 +39,14 @@ export default function useForm() {
     return Object.values(newErrors).every((error) => error === '');
   };
 
-  return { form, errors, handleChange, validateForm };
+  const setValues = (value: IEntry) => {
+    setFormValues(value);
+  };
+
+  const resetForm = () => {
+    setValues(initialState);
+    setErrors(initialState);
+  };
+
+  return { values, errors, handleChange, validateForm, setValues, resetForm };
 }

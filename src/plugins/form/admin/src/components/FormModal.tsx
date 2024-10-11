@@ -1,21 +1,28 @@
 import { Modal, Typography } from '@strapi/design-system';
-import { Form } from './Form';
 
-export const FormModal = ({ open, setOpen }: { open: boolean; setOpen: Function }) => {
+export const FormModal = ({
+  open,
+  onClose,
+  children,
+}: {
+  open: boolean;
+  onClose: () => void;
+  children: React.ReactElement;
+}) => {
+  const { Root, Content, Header, Title, Body } = Modal;
+
   return (
-    <Modal.Root open={open} onOpenChange={() => setOpen(false)}>
-      <Modal.Content>
-        <Modal.Header background="#212134">
-          <Modal.Title>
+    <Root open={open} onOpenChange={onClose}>
+      <Content>
+        <Header background="#212134">
+          <Title>
             <Typography variant="beta" fontWeight="bold" textColor="neutral800">
               Create an entry
             </Typography>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form setOpen={setOpen} />
-        </Modal.Body>
-      </Modal.Content>
-    </Modal.Root>
+          </Title>
+        </Header>
+        <Body>{children}</Body>
+      </Content>
+    </Root>
   );
 };
