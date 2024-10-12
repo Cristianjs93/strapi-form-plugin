@@ -1,1 +1,3 @@
-export default {};
+import entry from './entry';
+
+export default { entry };

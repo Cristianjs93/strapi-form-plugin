@@ -2,10 +2,50 @@ export default [
   {
     method: 'GET',
     path: '/',
-    // name of the controller file & the method.
     handler: 'controller.index',
     config: {
       policies: [],
+      auth: false,
+    },
+  },
+
+  {
+    method: 'GET',
+    path: '/find',
+    handler: 'entry.find',
+    config: {
+      policies: [],
+      auth: false,
+    },
+  },
+
+  {
+    method: 'POST',
+    path: '/create',
+    handler: 'entry.create',
+    config: {
+      policies: [],
+      auth: false,
+    },
+  },
+
+  {
+    method: 'PUT',
+    path: '/update/:id',
+    handler: 'entry.update',
+    config: {
+      policies: [],
+      auth: false,
+    },
+  },
+
+  {
+    method: 'DELETE',
+    path: '/delete/:id',
+    handler: 'entry.delete',
+    config: {
+      policies: [],
+      auth: false,
     },
   },
 ];

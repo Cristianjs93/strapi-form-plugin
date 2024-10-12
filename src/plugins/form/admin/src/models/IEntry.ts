@@ -1,5 +1,5 @@
 export default interface IEntry {
-  id?: string;
+  id?: number;
   name: string;
   email: string;
   message: string;
