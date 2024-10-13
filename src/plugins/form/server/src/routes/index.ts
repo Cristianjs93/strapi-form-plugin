@@ -5,7 +5,6 @@ export default [
     handler: 'controller.index',
     config: {
       policies: [],
-      auth: false,
     },
   },
 
@@ -15,7 +14,6 @@ export default [
     handler: 'entry.find',
     config: {
       policies: [],
-      auth: false,
     },
   },
 
@@ -25,7 +23,6 @@ export default [
     handler: 'entry.create',
     config: {
       policies: [],
-      auth: false,
     },
   },
 
@@ -35,7 +32,6 @@ export default [
     handler: 'entry.update',
     config: {
       policies: [],
-      auth: false,
     },
   },
 
@@ -45,7 +41,6 @@ export default [
     handler: 'entry.delete',
     config: {
       policies: [],
-      auth: false,
     },
   },
 ];

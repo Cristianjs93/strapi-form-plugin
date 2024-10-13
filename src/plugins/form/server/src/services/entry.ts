@@ -30,7 +30,7 @@ const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
   async create(data: IEntryRequest) {
     try {
       await strapi.documents(uid).create({ data });
-      return 'Entry created succesfully';
+      return { message: 'Entry created succesfully' };
     } catch (err) {
       throw new Error(err.message);
     }
@@ -39,7 +39,7 @@ const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
   async update(documentId: string, data: IEntryRequest) {
     try {
       await strapi.documents(uid).update({ documentId, data });
-      return 'Entry updated succesfully';
+      return { message: 'Entry updated succesfully' };
     } catch (err) {
       throw new Error(err.message);
     }
@@ -48,7 +48,7 @@ const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
   async delete(documentId: string) {
     try {
       await strapi.documents(uid).delete({ documentId });
-      return 'Entry deleted succesfully';
+      return { message: 'Entry deleted succesfully' };
     } catch (err) {
       throw new Error(err.message);
     }
