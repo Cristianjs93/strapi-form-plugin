@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import IEntry from '../models/IEntry';
+import { IEntryRequest } from '../models/IEntry';
 import { initialState } from '../data/constants/initialFormState';
 import { validators } from '../data/constants/validators';
 import {
@@ -8,10 +8,9 @@ import {
   getNameErrorMessage,
 } from '../utils/getErrorsMessage';
 
-export default function useForm() {
-  const [values, setFormValues] = useState<IEntry>(initialState);
-
-  const [errors, setErrors] = useState<IEntry>(initialState);
+const useForm = () => {
+  const [values, setFormValues] = useState<IEntryRequest>(initialState);
+  const [errors, setErrors] = useState<IEntryRequest>(initialState);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
@@ -22,7 +21,7 @@ export default function useForm() {
   };
 
   const validateForm = () => {
-    const newErrors: IEntry = { name: '', email: '', message: '' };
+    const newErrors: IEntryRequest = { name: '', email: '', message: '' };
 
     if (!validators.name.test(values.name)) {
       newErrors.name = getNameErrorMessage(values.name.length);
@@ -39,7 +38,7 @@ export default function useForm() {
     return Object.values(newErrors).every((error) => error === '');
   };
 
-  const setValues = (value: IEntry) => {
+  const setValues = (value: IEntryRequest) => {
     setFormValues(value);
   };
 
@@ -49,4 +48,6 @@ export default function useForm() {
   };
 
   return { values, errors, handleChange, validateForm, setValues, resetForm };
-}
+};
+
+export default useForm;

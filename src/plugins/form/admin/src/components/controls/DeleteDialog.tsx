@@ -2,10 +2,10 @@ import { Button, Dialog } from '@strapi/design-system';
 import { Trash, WarningCircle } from '@strapi/icons';
 
 export const DeleteDialog = ({
-  entryId,
+  documentId,
   action,
 }: {
-  entryId: string;
+  documentId: string;
   action: (id: string) => void;
 }) => {
   const { Root, Trigger, Content, Header, Body, Footer, Cancel, Action } = Dialog;
@@ -27,7 +27,7 @@ export const DeleteDialog = ({
             </Button>
           </Cancel>
           <Action>
-            <Button fullWidth variant="danger-light" onClick={() => action(entryId)}>
+            <Button fullWidth variant="danger-light" onClick={() => action(documentId)}>
               Confirm
             </Button>
           </Action>

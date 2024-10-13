@@ -19,13 +19,15 @@ export const EntriesTable = ({
   entries,
   onEdit,
   onConfirmDelete,
+  children,
 }: {
   entries: IEntry[];
   onEdit: (entry: IEntry) => void;
   onConfirmDelete: (id: string) => void;
+  children: React.ReactElement;
 }) => {
   return (
-    <Box padding={8} background="neutral100">
+    <Box padding={8}>
       <Table colCount={10} rowCount={10}>
         <Thead>
           <Tr>
@@ -64,13 +66,14 @@ export const EntriesTable = ({
               <Td>
                 <Flex gap="10px">
                   <Button variant="tertiary" startIcon={<Pencil />} onClick={() => onEdit(entry)} />
-                  <DeleteDialog entryId={String(entry.id)} action={onConfirmDelete} />
+                  <DeleteDialog documentId={String(entry.documentId)} action={onConfirmDelete} />
                 </Flex>
               </Td>
             </Tr>
           ))}
         </Tbody>
       </Table>
+      {children}
     </Box>
   );
 };

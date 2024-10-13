@@ -1,10 +1,10 @@
-import IEntry from './IEntry';
+import { IEntryRequest } from './IEntry';
 
 export default interface FormInstance {
-  values: IEntry;
-  errors: IEntry;
+  values: IEntryRequest;
+  errors: IEntryRequest;
   handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   validateForm: () => boolean;
-  setValues: (value: IEntry) => void;
+  setValues: (value: IEntryRequest) => void;
   resetForm: () => void;
 }

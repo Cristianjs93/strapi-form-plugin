@@ -3,10 +3,10 @@ import { AddButton } from './controls/AddButton';
 
 export const Header = ({ count, action }: { count: number; action: () => void }) => {
   return (
-    <Flex direction="row" alignItems="center" justifyContent="space-between" marginBottom="40px">
-      <Flex direction="column" alignItems="center">
+    <Flex alignItems="center" justifyContent="space-between" paddingLeft="40px" paddingRight="40px">
+      <Flex direction="column" alignItems="flex-start">
         <Typography variant="alpha" fontWeight="bold" textColor="neutral800" as="h2">
-          Custom Plugin
+          Entry
         </Typography>
         <Typography variant="beta" fontWeight="regular" textColor="#a5a5ba" as="h3">
           {`${count} entries found`}
