@@ -2,6 +2,15 @@ import type { Core } from '@strapi/strapi';
 import { validationErrorMessage } from '../utils/validationErrorMessage';
 
 const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
+  async findAll(ctx) {
+    try {
+      const response = await strapi.plugin('form').service('entry').findAll();
+      return response;
+    } catch (err) {
+      ctx.internalServerError(err.message);
+    }
+  },
+
   async find(ctx) {
     try {
       const { query } = ctx;

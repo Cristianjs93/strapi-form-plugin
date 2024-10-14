@@ -10,6 +10,16 @@ export default [
 
   {
     method: 'GET',
+    path: '/find-all',
+    handler: 'entry.findAll',
+    config: {
+      policies: [],
+      auth: false,
+    },
+  },
+
+  {
+    method: 'GET',
     path: '/find',
     handler: 'entry.find',
     config: {

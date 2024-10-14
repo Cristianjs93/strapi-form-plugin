@@ -23,7 +23,7 @@ export const EntriesForm = ({
       const response = await apiCall;
       return response;
     } catch (err) {
-      console.error('ERROR', err);
+      throw err;
     }
   };
 

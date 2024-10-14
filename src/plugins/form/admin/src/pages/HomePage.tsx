@@ -8,6 +8,7 @@ import { Header } from '../components/Header';
 import { Illo } from '../components/Illo';
 import { AddButton } from '../components/controls/AddButton';
 import { FormModal } from '../components/FormModal';
+import { FileDownload } from '../components/FileDownload';
 import { EntriesTable } from '../components/EntriesTable';
 import { TablePagination } from '../components/TablePagination';
 import { EntriesForm } from '../components/EntriesForm';
@@ -31,7 +32,7 @@ export const HomePage = () => {
 
   const fetchData = async (page = 1, pageSize = pagination.pageSize) => {
     !isLoading && setIsLoading(true);
-    const { data, pagination } = await EntryService.getAllEntries(page, pageSize);
+    const { data, pagination } = await EntryService.getPaginatedEntries(page, pageSize);
     setEntries(data);
     setPagination(pagination);
     setIsLoading(false);
@@ -83,17 +84,20 @@ export const HomePage = () => {
           action={<AddButton variant="secondary" action={() => setOpen(true)} />}
         />
       ) : (
-        <EntriesTable
-          entries={entries}
-          onEdit={handleEditClick}
-          onConfirmDelete={handleConfirmDelete}
-        >
-          <TablePagination
-            pagination={pagination}
-            onPageSizeChange={handlePageSizeChange}
-            fetchData={fetchData}
-          />
-        </EntriesTable>
+        <>
+          <FileDownload />
+          <EntriesTable
+            entries={entries}
+            onEdit={handleEditClick}
+            onConfirmDelete={handleConfirmDelete}
+          >
+            <TablePagination
+              pagination={pagination}
+              onPageSizeChange={handlePageSizeChange}
+              fetchData={fetchData}
+            />
+          </EntriesTable>
+        </>
       )}
       <FormModal open={open} onClose={handleModalClose}>
         <EntriesForm form={form} isEdit={isEdit} onSubmitFinish={handleSubmitFinish} />

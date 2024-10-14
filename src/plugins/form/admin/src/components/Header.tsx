@@ -3,7 +3,7 @@ import { AddButton } from './controls/AddButton';
 
 export const Header = ({ count, action }: { count: number; action: () => void }) => {
   return (
-    <Flex alignItems="center" justifyContent="space-between" paddingLeft="40px" paddingRight="40px">
+    <Flex alignItems="center" justifyContent="space-between" padding={['0px', '40px']}>
       <Flex direction="column" alignItems="flex-start">
         <Typography variant="alpha" fontWeight="bold" textColor="neutral800" as="h2">
           Entry

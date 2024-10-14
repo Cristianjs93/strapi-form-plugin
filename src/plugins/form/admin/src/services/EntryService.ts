@@ -3,7 +3,12 @@ import { PLUGIN_ID as pluginId } from '../pluginId';
 import { IEntryRequest } from '../models/IEntry';
 
 const EntryService = {
-  getAllEntries: async (page = 1, pageSize = 10) => {
+  getAllEntries: async () => {
+    const { get } = getFetchClient();
+    const { data } = await get(`/${pluginId}/find-all`);
+    return data;
+  },
+  getPaginatedEntries: async (page = 1, pageSize = 10) => {
     const { get } = getFetchClient();
     const { data } = await get(`/${pluginId}/find?page=${page}&pageSize=${pageSize}`);
     return data;

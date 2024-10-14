@@ -4,6 +4,14 @@ import IEntryRequest from '../models/IEntryRequest';
 const uid = 'plugin::form.entry';
 
 const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
+  async findAll() {
+    try {
+      return await strapi.documents(uid).findMany();
+    } catch (err) {
+      throw err;
+    }
+  },
+
   async find(query) {
     try {
       const { page = 1, pageSize = 10 } = query;

@@ -27,7 +27,7 @@ export const EntriesTable = ({
   children: React.ReactElement;
 }) => {
   return (
-    <Box padding={8}>
+    <Box padding={['20px', '40px']}>
       <Table colCount={10} rowCount={10}>
         <Thead>
           <Tr>
