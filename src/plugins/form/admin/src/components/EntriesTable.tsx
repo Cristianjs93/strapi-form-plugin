@@ -19,7 +19,12 @@ export const EntriesTable = ({
 
   const actionButtons = (entry: IEntry) => (
     <Flex gap="10px">
-      <ActionButton variant="secondary" icon={<Pencil />} action={() => onEdit(entry)} />
+      <ActionButton
+        variant="secondary"
+        icon={<Pencil />}
+        tooltip="Edit"
+        action={() => onEdit(entry)}
+      />
       <DeleteDialog documentId={String(entry.documentId)} confirmAction={onConfirmDelete} />
     </Flex>
   );

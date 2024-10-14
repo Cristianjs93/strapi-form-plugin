@@ -48,8 +48,18 @@ export const FileDownload = () => {
 
   return (
     <Flex justifyContent="flex-end" gap="10px" padding={['20px', '40px', '0px', '40px']}>
-      <ActionButton icon={<Archive />} action={handleDownloadJson} isDisabled={!entries.length} />
-      <ActionButton icon={<File />} action={handleDownloadCsv} isDisabled={!entries.length} />
+      <ActionButton
+        icon={<Archive />}
+        tooltip="Download JSON"
+        action={handleDownloadJson}
+        isDisabled={!entries.length}
+      />
+      <ActionButton
+        icon={<File />}
+        tooltip="Download CSV"
+        action={handleDownloadCsv}
+        isDisabled={!entries.length}
+      />
     </Flex>
   );
 };
