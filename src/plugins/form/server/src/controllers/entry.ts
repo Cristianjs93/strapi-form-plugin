@@ -1,4 +1,5 @@
 import type { Core } from '@strapi/strapi';
+import { validationErrorMessage } from '../utils/validationErrorMessage';
 
 const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
   async find(ctx) {
@@ -7,7 +8,7 @@ const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
       const response = await strapi.plugin('form').service('entry').find(query);
       return response;
     } catch (err) {
-      ctx.throw(500, err);
+      ctx.internalServerError(err.message);
     }
   },
 
@@ -17,7 +18,8 @@ const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
       const response = await strapi.plugin('form').service('entry').create(request.body);
       return response;
     } catch (err) {
-      ctx.throw(500, err);
+      const message = validationErrorMessage(err);
+      ctx.internalServerError(message);
     }
   },
 
@@ -27,7 +29,7 @@ const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
       const response = await strapi.plugin('form').service('entry').update(params.id, request.body);
       return response;
     } catch (err) {
-      ctx.throw(500, err);
+      ctx.internalServerError(err.message);
     }
   },
 
@@ -37,7 +39,7 @@ const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
       const response = await strapi.plugin('form').service('entry').delete(params.id);
       return response;
     } catch (err) {
-      ctx.throw(500, err);
+      ctx.internalServerError(err.message);
     }
   },
 });

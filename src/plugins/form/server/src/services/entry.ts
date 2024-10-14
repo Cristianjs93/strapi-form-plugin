@@ -23,7 +23,7 @@ const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
       };
       return response;
     } catch (err) {
-      throw new Error(err.message);
+      throw err;
     }
   },
 
@@ -32,7 +32,7 @@ const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
       await strapi.documents(uid).create({ data });
       return { message: 'Entry created succesfully' };
     } catch (err) {
-      throw new Error(err.message);
+      throw err;
     }
   },
 
@@ -41,7 +41,7 @@ const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
       await strapi.documents(uid).update({ documentId, data });
       return { message: 'Entry updated succesfully' };
     } catch (err) {
-      throw new Error(err.message);
+      throw err;
     }
   },
 
@@ -50,7 +50,7 @@ const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
       await strapi.documents(uid).delete({ documentId });
       return { message: 'Entry deleted succesfully' };
     } catch (err) {
-      throw new Error(err.message);
+      throw err;
     }
   },
 });
