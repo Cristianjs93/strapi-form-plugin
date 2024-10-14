@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import IEntry from '../models/IEntry';
 import EntryService from '../services/EntryService';
 import { Flex } from '@strapi/design-system';
-import { DownloadButton } from './controls/DownloadButton';
+import { ActionButton } from './controls/ActionButton';
 import { Archive, File } from '@strapi/icons';
 
 export const FileDownload = () => {
@@ -16,8 +16,8 @@ export const FileDownload = () => {
   }, []);
 
   const handleDownloadJson = () => {
-    const jsonString = JSON.stringify(entries, null, 2);
-    const blob = new Blob([jsonString], { type: 'application/json' });
+    const jsonContent = JSON.stringify(entries, null, 2);
+    const blob = new Blob([jsonContent], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
@@ -39,7 +39,6 @@ export const FileDownload = () => {
     const csvContent = headers + rows;
     const blob = new Blob([csvContent], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
-
     const link = document.createElement('a');
     link.href = url;
     link.download = 'entries.csv';
@@ -49,8 +48,8 @@ export const FileDownload = () => {
 
   return (
     <Flex justifyContent="flex-end" gap="10px" padding={['20px', '40px', '0px', '40px']}>
-      <DownloadButton icon={<Archive />} action={handleDownloadJson} disabled={!entries.length} />
-      <DownloadButton icon={<File />} action={handleDownloadCsv} disabled={!entries.length} />
+      <ActionButton icon={<Archive />} action={handleDownloadJson} isDisabled={!entries.length} />
+      <ActionButton icon={<File />} action={handleDownloadCsv} isDisabled={!entries.length} />
     </Flex>
   );
 };

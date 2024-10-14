@@ -1,17 +1,6 @@
 import IEntry from '../models/IEntry';
-import {
-  Box,
-  Button,
-  Flex,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  Typography,
-  VisuallyHidden,
-} from '@strapi/design-system';
+import { Box, Flex, Table, Tbody, Td, Th, Thead, Tr, Typography } from '@strapi/design-system';
+import { ActionButton } from './controls/ActionButton';
 import { DeleteDialog } from './controls/DeleteDialog';
 import { Pencil } from '@strapi/icons';
 
@@ -26,26 +15,25 @@ export const EntriesTable = ({
   onConfirmDelete: (id: string) => void;
   children: React.ReactElement;
 }) => {
+  const columns = ['ID', 'Name', 'Email', 'Message', 'Actions'];
+
+  const actionButtons = (entry: IEntry) => (
+    <Flex gap="10px">
+      <ActionButton variant="secondary" icon={<Pencil />} action={() => onEdit(entry)} />
+      <DeleteDialog documentId={String(entry.documentId)} confirmAction={onConfirmDelete} />
+    </Flex>
+  );
+
   return (
     <Box padding={['20px', '40px']}>
       <Table colCount={10} rowCount={10}>
         <Thead>
           <Tr>
-            <Th>
-              <Typography variant="sigma">ID</Typography>
-            </Th>
-            <Th>
-              <Typography variant="sigma">Name</Typography>
-            </Th>
-            <Th>
-              <Typography variant="sigma">Email</Typography>
-            </Th>
-            <Th>
-              <Typography variant="sigma">Message</Typography>
-            </Th>
-            <Th>
-              <VisuallyHidden>Actions</VisuallyHidden>
-            </Th>
+            {columns.map((column) => (
+              <Th key={`column-${column}`}>
+                <Typography variant="sigma">{column}</Typography>
+              </Th>
+            ))}
           </Tr>
         </Thead>
         <Tbody>
@@ -63,12 +51,7 @@ export const EntriesTable = ({
               <Td>
                 <Typography textColor="neutral800">{entry.message}</Typography>
               </Td>
-              <Td>
-                <Flex gap="10px">
-                  <Button variant="tertiary" startIcon={<Pencil />} onClick={() => onEdit(entry)} />
-                  <DeleteDialog documentId={String(entry.documentId)} action={onConfirmDelete} />
-                </Flex>
-              </Td>
+              <Td>{actionButtons(entry)}</Td>
             </Tr>
           ))}
         </Tbody>

@@ -1,19 +1,21 @@
-import { Button, Dialog } from '@strapi/design-system';
+import { Button, Dialog, IconButton } from '@strapi/design-system';
 import { Trash, WarningCircle } from '@strapi/icons';
 
 export const DeleteDialog = ({
   documentId,
-  action,
+  confirmAction,
 }: {
   documentId: string;
-  action: (id: string) => void;
+  confirmAction: (id: string) => void;
 }) => {
   const { Root, Trigger, Content, Header, Body, Footer, Cancel, Action } = Dialog;
 
   return (
     <Root>
       <Trigger>
-        <Button variant="tertiary" startIcon={<Trash />} />
+        <IconButton variant="danger-light" withTooltip={false}>
+          <Trash />
+        </IconButton>
       </Trigger>
       <Content>
         <Header>Confirmation</Header>
@@ -27,7 +29,7 @@ export const DeleteDialog = ({
             </Button>
           </Cancel>
           <Action>
-            <Button fullWidth variant="danger-light" onClick={() => action(documentId)}>
+            <Button fullWidth variant="danger-light" onClick={() => confirmAction(documentId)}>
               Confirm
             </Button>
           </Action>
