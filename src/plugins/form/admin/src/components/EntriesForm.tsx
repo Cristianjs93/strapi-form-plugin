@@ -2,6 +2,7 @@ import { FormEvent } from 'react';
 import FormInstance from '../models/FormInstance';
 import EntryService from '../services/EntryService';
 import { Button, Flex } from '@strapi/design-system';
+import { showError, showSuccess } from './ui/Toast';
 import { inputFactory } from '../factories/inputFactory';
 
 export const EntriesForm = ({
@@ -31,12 +32,12 @@ export const EntriesForm = ({
     try {
       e.preventDefault();
       if (validateForm()) {
-        const response = await handleApiResponse();
-        console.log(response);
+        const { message } = await handleApiResponse();
+        showSuccess(message);
         onSubmitFinish();
       }
-    } catch (err) {
-      console.error('ERROR', err);
+    } catch (err: any) {
+      showError(err.message);
     }
   };
 

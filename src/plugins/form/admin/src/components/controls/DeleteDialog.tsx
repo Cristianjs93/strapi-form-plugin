@@ -1,7 +1,7 @@
 import { Button, Dialog, IconButton } from '@strapi/design-system';
-import { Trash, WarningCircle } from '@strapi/icons';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import TooltipBox from '../ui/Tooltip';
+import { Trash, WarningCircle } from '@strapi/icons';
 
 export const DeleteDialog = ({
   documentId,

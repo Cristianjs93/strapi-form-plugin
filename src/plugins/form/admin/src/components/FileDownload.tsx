@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import IEntry from '../models/IEntry';
 import EntryService from '../services/EntryService';
 import { Flex } from '@strapi/design-system';
@@ -15,19 +15,23 @@ export const FileDownload = () => {
     })();
   }, []);
 
-  const handleDownloadJson = () => {
-    const jsonContent = JSON.stringify(entries, null, 2);
-    const blob = new Blob([jsonContent], { type: 'application/json' });
+  const downloadFile = useCallback((content: string, fileName: string, type: string) => {
+    const blob = new Blob([content], { type });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'entries.json';
+    link.download = fileName;
     link.click();
     URL.revokeObjectURL(url);
-  };
+  }, []);
 
-  const handleDownloadCsv = () => {
-    const headers = Object.keys(entries[0]).join(',') + '\n';
+  const handleDownloadJson = useCallback(() => {
+    const jsonContent = JSON.stringify(entries, null, 2);
+    downloadFile(jsonContent, 'entries.json', 'application/json');
+  }, [entries, downloadFile]);
+
+  const handleDownloadCsv = useCallback(() => {
+    const headers = Object.keys(entries[0] || {}).join(',') + '\n';
     const rows = entries
       .map((entry) =>
         Object.values(entry)
@@ -35,16 +39,9 @@ export const FileDownload = () => {
           .join(',')
       )
       .join('\n');
-
     const csvContent = headers + rows;
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'entries.csv';
-    link.click();
-    URL.revokeObjectURL(url);
-  };
+    downloadFile(csvContent, 'entries.csv', 'text/csv');
+  }, [entries, downloadFile]);
 
   return (
     <Flex justifyContent="flex-end" gap="10px" padding={['20px', '40px', '0px', '40px']}>

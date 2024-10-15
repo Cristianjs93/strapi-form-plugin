@@ -38,7 +38,8 @@ const entry = ({ strapi }: { strapi: Core.Strapi }) => ({
       const response = await strapi.plugin('form').service('entry').update(params.id, request.body);
       return response;
     } catch (err) {
-      ctx.internalServerError(err.message);
+      const message = validationErrorMessage(err);
+      ctx.internalServerError(message);
     }
   },
 

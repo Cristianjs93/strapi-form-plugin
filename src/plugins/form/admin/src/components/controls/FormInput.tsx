@@ -12,11 +12,18 @@ export const FormInput = ({
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   errors: string;
 }) => {
+  const { Root, Label, Error } = Field;
+
   return (
-    <Field.Root id={label} error={errors} width="100%" required>
-      <Field.Label style={{ textTransform: 'capitalize' }}>{label}</Field.Label>
-      <TextInput placeholder={`Type your ${label}`} value={value} onChange={onChange} />
-      <Field.Error />
-    </Field.Root>
+    <Root id={label} error={errors} width="100%" required>
+      <Label style={{ textTransform: 'capitalize' }}>{label}</Label>
+      <TextInput
+        placeholder={`Type your ${label}`}
+        value={value}
+        onChange={onChange}
+        autoComplete="off"
+      />
+      <Error />
+    </Root>
   );
 };

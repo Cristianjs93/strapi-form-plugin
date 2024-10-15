@@ -8,7 +8,7 @@ export const Header = ({ count, action }: { count: number; action: () => void })
         <Typography variant="alpha" fontWeight="bold" textColor="neutral800" as="h2">
           Entry
         </Typography>
-        <Typography variant="beta" fontWeight="regular" textColor="#a5a5ba" as="h3">
+        <Typography variant="beta" fontWeight="regular" textColor="#a5a5ba" as="span">
           {`${count} entries found`}
         </Typography>
       </Flex>

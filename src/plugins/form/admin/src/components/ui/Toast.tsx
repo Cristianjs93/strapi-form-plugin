@@ -1,18 +1,26 @@
-import { Alert } from '@strapi/design-system';
+import { ToastContainer, toast, ToastPosition, Zoom } from 'react-toastify';
+import { ToastAlert } from './ToastAlert';
 
-const showSuccess = () => {
-  console.log('SUCCESS');
-  return (
-    <Alert closeLabel="Close" title="Success" variant="success">
-      This is the success variant.
-    </Alert>
-  );
+const options = {
+  position: 'top-right' as ToastPosition,
+  autoClose: 3000,
+  closeButton: false,
+  closeOnClick: true,
+  hideProgressBar: true,
+  pauseOnHover: false,
+  pauseOnFocusLoss: false,
+  draggable: false,
+  transition: Zoom,
+  style: { width: 'fit-content', minHeight: 0, padding: 0, right: 200 },
+  bodyStyle: { padding: 0 },
 };
 
-const showError = () => (
-  <Alert closeLabel="Close" title="Error" variant="danger">
-    This is the danger variant.
-  </Alert>
-);
+const showSuccess = (message: string) =>
+  toast(<ToastAlert title="Success:" variant="success" message={message} />, options);
 
-export { showSuccess, showError };
+const showError = (message: string) =>
+  toast(<ToastAlert title="Error:" variant="danger" message={message} />, options);
+
+<ToastContainer {...options} style={{ backgroundColor: 'red' }} />;
+
+export { ToastContainer, showSuccess, showError };

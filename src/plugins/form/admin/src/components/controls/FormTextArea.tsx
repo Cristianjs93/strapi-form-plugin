@@ -12,11 +12,13 @@ export const FormTextArea = ({
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   errors: string;
 }) => {
+  const { Root, Label, Error } = Field;
+
   return (
-    <Field.Root id={label} error={errors} width="100%" required>
-      <Field.Label style={{ textTransform: 'capitalize' }}>{label}</Field.Label>
+    <Root id={label} error={errors} width="100%" required>
+      <Label style={{ textTransform: 'capitalize' }}>{label}</Label>
       <Textarea placeholder="Write a message" value={value} onChange={onChange} />
-      <Field.Error />
-    </Field.Root>
+      <Error />
+    </Root>
   );
 };

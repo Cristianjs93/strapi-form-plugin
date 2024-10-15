@@ -1,11 +1,7 @@
 export const validationErrorMessage = (error: any) => {
-  let message = 'There is already an account associated with that ';
+  let message: String;
   if (error.name === 'ValidationError') {
-    error.details.errors.forEach((err) => {
-      err.path.forEach((e) => {
-        message += e;
-      });
-    });
+    message = 'There is already an account associated with that email';
   } else {
     message = error.message;
   }

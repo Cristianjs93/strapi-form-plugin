@@ -7,11 +7,12 @@ import { Box, EmptyStateLayout } from '@strapi/design-system';
 import { Header } from '../components/Header';
 import { Illo } from '../components/Illo';
 import { AddButton } from '../components/controls/AddButton';
-import { FormModal } from '../components/FormModal';
 import { FileDownload } from '../components/FileDownload';
 import { EntriesTable } from '../components/EntriesTable';
 import { TablePagination } from '../components/TablePagination';
+import { FormModal } from '../components/FormModal';
 import { EntriesForm } from '../components/EntriesForm';
+import { showError, showSuccess } from '../components/ui/Toast';
 
 export const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,11 +32,15 @@ export const HomePage = () => {
   }, []);
 
   const fetchData = async (page = 1, pageSize = pagination.pageSize) => {
-    !isLoading && setIsLoading(true);
-    const { data, pagination } = await EntryService.getPaginatedEntries(page, pageSize);
-    setEntries(data);
-    setPagination(pagination);
-    setIsLoading(false);
+    try {
+      !isLoading && setIsLoading(true);
+      const { data, pagination } = await EntryService.getPaginatedEntries(page, pageSize);
+      setEntries(data);
+      setPagination(pagination);
+      setIsLoading(false);
+    } catch (err: any) {
+      showError(err.message);
+    }
   };
 
   const handleModalClose = () => {
@@ -52,11 +57,11 @@ export const HomePage = () => {
 
   const handleConfirmDelete = async (id: string) => {
     try {
-      const response = await EntryService.deleteEntry(id);
-      console.log(response);
+      const { message } = await EntryService.deleteEntry(id);
+      showSuccess(message);
       fetchData();
-    } catch (err) {
-      console.error('Error', err);
+    } catch (err: any) {
+      showError(err.message);
     }
   };
 
