@@ -1,61 +1,93 @@
-# 🚀 Getting started with Strapi
+# Strapi custom plugin 🚀
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+This repository contains a custom plugin developed for **Stripe** called "form". The plugin integrates with Strapi's design system to ensure its components align with the overall interface of Strapi. It includes a custom form component validated by a custom hook, allowing seamless communication between the plugin and its database for content management.
 
-### `develop`
+Additionally, the plugin exposes an API that is consumed by an external form. The fields of this external form undergo a validation process both before submission and during data processing in the plugin's API.
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+Once there are records in the database, the functionality of downloading the information in the selected format between JSON and CSV is offered.
 
-```
-npm run develop
-# or
-yarn develop
-```
+## Features
 
-### `start`
+- **Custom Form Component**: The plugin includes a dynamic form component built with Strapi's design system.
+- **Custom Hook Validation**: A custom hook is implemented to validate the form fields before data submission.
+- **API Integration**: The plugin communicates with its database via an API, which is also consumed by an external form.
+- **Field Validation**: Both internal and external forms validate the data through strict rules before processing in the API.
+- **Data Download**: You can download the plugin's data as JSON or CSV file.
 
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
+## Technologies Used
 
-```
-npm run start
-# or
-yarn start
-```
+- **Strapi**: Headless CMS for simplify and optimize content management in web and mobile applications.
+- **Strapi Design System**: A UI component library for creating amazing Strapi extensions.
+- **React**: JavaScript library for building user interfaces.
+- **Vite**: A fast development build tool for modern web projects.
+- **react-toastify**: Notifications for your app with ease.
 
-### `build`
+## Installation
 
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
+1. Clone the repository:
 
-```
-npm run build
-# or
-yarn build
-```
+   ```bash
+   git clone https://github.com/Cristianjs93/strapi-form-plugin.git
+   ```
 
-## ⚙️ Deployment
+2. Navigate to the project directory:
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
+   ```bash
+   cd strapi-form-plugin
+   ```
 
-```
-yarn strapi deploy
-```
+3. Install the dependencies:
 
-## 📚 Learn more
+   ```bash
+   npm install
+   ```
 
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
+## Usage
 
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
+1. Run the application:
 
-## ✨ Community
+   ```bash
+   npm run develop
+   ```
 
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
+2. Open your browser and navigate to:
 
----
+   ```
+   http://localhost:1337/admin
+   ```
 
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+3. Upon first run, Strapi will prompt you to create an administrator account. You will see a form to create a new admin user. Fill in the required fields.
+
+4. After submitting the form, you will be logged into the Strapi Admin Panel.
+
+## Environment
+
+Follow the `.env.example` file to add the required variables.
+
+## Screenshots
+
+![admin-creation-form](./public/assets/admin-creation-form.png)
+_*Admin creation From*_
+
+<br/>
+
+![strapi-home](./public/assets/strapi-home.png)
+_*Strapi admin panel*_
+
+<br/>
+
+![custom-plugin](./public/assets/custom-plugin.png)
+_*Custom plugin home page*_
+
+<br/>
+
+![alt text](./public/assets/mangement-form.png)
+_*Management form with error response*_
+
+## Contributing
+
+If you would like to contribute to this project, please fork the repository and submit a pull request. Any contributions, whether improvements or bug fixes, are welcome!
+
+## License
+
+This project is licensed under the MIT License.

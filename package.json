@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "description": "A Strapi application",
+  "license": "MIT",
   "scripts": {
     "build": "strapi build",
     "deploy": "strapi deploy",
-    "develop": "concurrently \"npm run watch\" \"strapi develop\"",
+    "develop": "strapi develop",
     "start": "strapi start",
     "strapi": "strapi",
+    "develop:watch": "concurrently \"npm run watch\" \"strapi develop\"",
     "watch": "cd src/plugins/form && npm run watch"
   },
   "dependencies": {
